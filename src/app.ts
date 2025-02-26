@@ -12,7 +12,7 @@ export interface OpenFeatureRequest extends Request {
 }
 
 async function run() {
-  const { devcycleClient } = await initializeDevCycleWithOpenFeature();
+  const { devcycleProvider } = await initializeDevCycleWithOpenFeature();
 
   const app = express();
   app.use(express.urlencoded({ extended: false }));
@@ -48,8 +48,10 @@ async function run() {
   /**
    * Return all variable values for debugging purposes
    */
-  app.get("/variables", (req, res) => {
-    const variables = devcycleClient.allVariables(req.user as unknown as DevCycleUser);
+  app.get("/variables", async (req, res) => {
+    const variables = await devcycleProvider.devcycleClient.allVariables(
+      req.user as unknown as DevCycleUser
+    );
     res.json(variables);
   });
 
