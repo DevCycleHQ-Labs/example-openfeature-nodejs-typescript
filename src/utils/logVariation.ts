@@ -32,8 +32,8 @@ export const logVariation = () => {
     );
     const { variationName = "Default" } = features["hello-togglebot"] ?? {};
 
-    // fetch the togglebot variables from OpenFeature
-    const wink = await openFeatureClient.getBooleanValue(
+     // fetch the togglebot variables from OpenFeature
+     const wink = await openFeatureClient.getBooleanValue(
       "togglebot-wink",
       false,
       SERVICE_USER
